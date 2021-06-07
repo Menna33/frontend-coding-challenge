@@ -1,0 +1,28 @@
+.repo-box {
+    background-color: lightblue;
+    width: 500px;
+    height:200px;
+    border: 10px solid blue;
+    padding: 20px;
+    margin: 20px;
+  }
+
+.repo-img
+{
+  float:left;
+  height:60%;
+  width:20%;
+  padding:5px 20px;
+}
+
+.repo-info
+{
+  /*float:right;*/  
+  position: relative;
+    width: 60%;
+    height: 80px;
+    margin: auto;
+    /*margin-top: 25%;*/
+    background-color: transparent;
+}
+  
