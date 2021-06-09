@@ -2,7 +2,7 @@
     background-color: Snow;
     width: 800px;
     height:200px;
-    /*border: 10px solid black;*/
+    border: 3px solid black;
     padding: 15px;
     margin: 15px;
   }
@@ -35,7 +35,7 @@
   margin: 5px 5px 5px 5px;
   /*margin-top: 25%;*/
   background-color: transparent;
-  border: 3px solid black;
+  border: 2px solid black;
 }
 .issue-box
 {
@@ -45,5 +45,5 @@
   margin: 5px 5px 5px 5px;
   /*margin-top: 25%;*/
   background-color: transparent;
-  border: 3px solid black;
+  border: 2px solid black;
 }
