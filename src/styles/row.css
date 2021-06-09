@@ -1,0 +1,49 @@
+.repo-box {
+    background-color: Snow;
+    width: 800px;
+    height:200px;
+    /*border: 10px solid black;*/
+    padding: 15px;
+    margin: 15px;
+  }
+
+.repo-img
+{
+  float:left;
+  height:170px;
+  width:20%;
+  padding:5px 20px;
+  margin:15px 5px 5px 15px;
+}
+
+.repo-info
+{
+  float:right;  
+  position: relative;
+    width: 60%;
+    height: 80px;
+    margin: auto;
+    /*margin-top: 25%;*/
+    background-color: transparent;
+}
+  
+.star-box
+{  
+  /*position: relative;*/
+  width: 20%;
+  height: 20px;
+  margin: 5px 5px 5px 5px;
+  /*margin-top: 25%;*/
+  background-color: transparent;
+  border: 3px solid black;
+}
+.issue-box
+{
+  /*position: relative;*/
+  width: 20%;
+  height: 20px;
+  margin: 5px 5px 5px 5px;
+  /*margin-top: 25%;*/
+  background-color: transparent;
+  border: 3px solid black;
+}
