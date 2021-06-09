@@ -3,7 +3,9 @@ import Repo from "./Repo";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import PropTypes from "prop-types";
-//import LoadingBar from "react-redux-loading";
+import BASE_API_URL from '../env'
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -33,14 +35,25 @@ class App extends React.Component {
     );
     //console.log("formattedDate ; ", formattedDate);
 
-    let url = ` https://api.github.com/search/repositories?q=created:>${formattedDate}&sort=stars&order=desc&page=${pageNum}`;
+    let url = ` ${BASE_API_URL}${formattedDate}&sort=stars&order=desc&page=${pageNum}`;
     fetch(url)
-      .then((res) => res.json())
+      .then((res) =>
+      { 
+          if(res.status >= 400) {
+        throw new Error("Server responds with error!");
+      }
+         return res.json()})
       .then((data) => {
         this.setState({
           repos: [...this.state.repos, ...data.items],
           loading:false,
         });
+      },
+      (error) => {
+        if (error) {
+          // handle error here
+          console.log("error in fetching");
+        }
       });
   };
 
@@ -52,31 +65,22 @@ class App extends React.Component {
 
   infiniteScroll = () => {
     // End of the document reached?
-    console.log('da55555555l hena')
-    console.log(' window.innerHeight + document.documentElement.scrollTop ===document.documentElement.offsetHeight', window.innerHeight + document.documentElement.scrollTop ===
-    document.documentElement.offsetHeight)
-    console.log(`document.documentElement.scrollTop ${document.documentElement.scrollTop }`)
-    console.log(`window.innerHeight ${window.innerHeight }`)
-    console.log(`document.documentElement.offsetHeight ${document.documentElement.offsetHeight }`)
+  
     if (
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.offsetHeight
     ) {
       let newPage = this.state.pageNumber;
-      console.log('this.state.page : ',this.state.pageNumber)
       newPage++;
       this.setState({
         pageNumber: newPage,
       });
-      console.log('hy3ml fetch' ,newPage)
       this.fetchData(newPage);
-      console.log('3ammmmmmmmmmmmml fetch')
     }
   };
 
   render() {
-    const { repos,loading} = this.state;
-    //console.log("repos: ", repos);
+    const { repos} = this.state;
     return (<div>
         {this.state.loading? (<Loader
             type="Puff"
@@ -88,9 +92,9 @@ class App extends React.Component {
          
           ) : (
             <div>
-            {repos.map((repo) => (
+            {repos?(repos.map((repo) => (
               <Repo key={repo.id} repo={repo} />
-            ))}
+            ))):(<p>You have reached the end :)</p>)}
             </div>)
   }
            </div>
@@ -98,5 +102,12 @@ class App extends React.Component {
     );
   }
 }
-
+App.propTypes = {
+    loading: PropTypes.bool,
+    pageNumber: PropTypes.number,
+    repos:PropTypes.array,
+    fetchData:PropTypes.func,
+    infiniteScroll:PropTypes.func, 
+  };
+  
 export default App;
